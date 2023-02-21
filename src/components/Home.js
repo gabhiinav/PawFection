@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-function home(props) {
+function home() {
   return (
     <div>
       <div>
