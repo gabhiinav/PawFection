@@ -29,10 +29,10 @@ function signup() {
                     <input type="password" id="password" placeholder="Password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
 
-                <div class="flex flex-col pt-4">
+                {/* <div class="flex flex-col pt-4">
                     <label for="confirm-password" class="text-lg">Confirm Password</label>
                     <input type="password" id="confirm-password" placeholder="Password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
-                </div>
+                </div> */}
 
                 <input type="submit" value="Register" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8" />
               </form>
