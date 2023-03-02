@@ -1,27 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  auth,
-  registerWithEmailAndPassword,
-  signInWithGoogle,
-} from "/Users/abhinav/Documents/Uni/Sem 4/DTI/pawfection/src/firebase.js";
-
+import React, { useRef } from "react";
+import { useUserContext } from "../context/userContext";
 
 function Signup() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [user, loading, error] = useAuthState(auth);
-  const history = useNavigate();
-  const register = () => {
-    if (!name) alert("Please enter name");
-    registerWithEmailAndPassword(name, email, password);
+  const emailRef = useRef();
+  const nameRef = useRef();
+  const psdRef = useRef();
+  const { registerUser } = useUserContext();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const email = emailRef.current.value;
+    const name = nameRef.current.value;
+    const password = psdRef.current.value;
+    if (email && password && name) registerUser(email, password, name);
   };
-  useEffect(() => {
-    if (loading) return;
-    if (user) history.replace("/dashboard");
-  }, [user, loading]);
 
   return (
     <>
@@ -38,17 +30,17 @@ function Signup() {
               <form class="flex flex-col pt-3 md:pt-8" onsubmit="event.preventDefault();">
                 <div class="flex flex-col pt-4">
                   <label for="name" class="text-lg">Name</label>
-                  <input type="text" id="name" placeholder="Anurag Goswami" value={name} onChange={(e) => setName(e.target.value)} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                  <input type="text" id="name" placeholder="Your Name" ref={nameRef} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
 
                 <div class="flex flex-col pt-4">
                     <label for="email" class="text-lg">Email</label>
-                    <input type="email" id="email" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                    <input type="email" id="email" placeholder="your@email.com" ref={emailRef} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
 
                 <div class="flex flex-col pt-4">
                     <label for="password" class="text-lg">Password</label>
-                    <input type="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                    <input type="password" id="password" placeholder="Password" ref={psdRef} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
 
                 {/* <div class="flex flex-col pt-4">
@@ -57,7 +49,7 @@ function Signup() {
                 </div> */}
 
                 {/* <input type="submit" value="Register" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8" /> */}
-                <button onClick={register} class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">Register</button>
+                <button class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">Register</button>
               </form>
 
               <div class="text-center pt-12 pb-12">

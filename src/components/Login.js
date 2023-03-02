@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { auth, logInWithEmailAndPassword, signInWithGoogle } from "/Users/abhinav/Documents/Uni/Sem 4/DTI/pawfection/src/firebase.js";
-import { useAuthState } from "react-firebase-hooks/auth";
+import React, { useRef } from "react";
+import { useUserContext } from "../context/userContext";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, loading, error] = useAuthState(auth);
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (loading) {
-      return;
-    }
-    if (user) navigate("/dashboard");
-  }, [user, loading]);
+  const emailRef = useRef();
+  const psdRef = useRef();
+  const { signInUser, forgotPassword } = useUserContext();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const email = emailRef.current.value;
+    const password = psdRef.current.value;
+    if (email && password) signInUser(email, password);
+  };
+
   return (
     <>
     <div class="bg-white font-family-karla h-screen">
@@ -27,15 +26,15 @@ function Login() {
           <form class="flex flex-col pt-3 md:pt-8" onsubmit="event.preventDefault();">
             <div class="flex flex-col pt-4">
               <label for="email" class="text-lg">Email</label>
-              <input type="email" id="email" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+              <input type="email" id="email" placeholder="your@email.com" ref={emailRef} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
             </div>
             <div class="flex flex-col pt-4">
             <label for="password" class="text-lg">Password</label>
-            <input type="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+            <input type="password" id="password" placeholder="Password"ref={psdRef} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
             </div>
             {/* <div class="flex flex-col pt-4"> */}
             {/* <input type="submit" value="Log In" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8" /> */}
-            <button onClick={() => logInWithEmailAndPassword(email, password)} class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">Log In</button>
+            <button class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">Log In</button>
             {/* </div> */}
           </form>
           <div class="text-center pt-12 pb-12">
