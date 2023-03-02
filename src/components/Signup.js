@@ -1,18 +1,21 @@
-import React, { useRef } from "react";
-import { useUserContext } from "../context/userContext";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
+import { auth } from "../firebase";
 
 function Signup() {
-  const emailRef = useRef();
-  const nameRef = useRef();
-  const psdRef = useRef();
-  const { registerUser } = useUserContext();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const onSubmit = (e) => {
+  const signUp = (e) => {
     e.preventDefault();
-    const email = emailRef.current.value;
-    const name = nameRef.current.value;
-    const password = psdRef.current.value;
-    if (email && password && name) registerUser(email, password, name);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -30,17 +33,17 @@ function Signup() {
               <form class="flex flex-col pt-3 md:pt-8" onsubmit="event.preventDefault();">
                 <div class="flex flex-col pt-4">
                   <label for="name" class="text-lg">Name</label>
-                  <input type="text" id="name" placeholder="Your Name" ref={nameRef} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                  <input type="text" id="name" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
 
                 <div class="flex flex-col pt-4">
                     <label for="email" class="text-lg">Email</label>
-                    <input type="email" id="email" placeholder="your@email.com" ref={emailRef} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                    <input type="email" id="email" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
 
                 <div class="flex flex-col pt-4">
                     <label for="password" class="text-lg">Password</label>
-                    <input type="password" id="password" placeholder="Password" ref={psdRef} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                    <input type="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
 
                 {/* <div class="flex flex-col pt-4">
