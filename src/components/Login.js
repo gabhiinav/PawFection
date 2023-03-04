@@ -1,21 +1,29 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
-import { auth } from "../firebase";
+import React, {useState} from 'react';
+import {  signInWithEmailAndPassword   } from 'firebase/auth';
+import { auth } from '../firebase';
+import { NavLink, useNavigate } from 'react-router-dom'
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const signIn = (e) => {
-    e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+     
+  const onLogin = (e) => {
+      e.preventDefault();
+      signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
+          // Signed in 
+          const user = userCredential.user;
+          navigate("/home")
+          console.log(user);
       })
       .catch((error) => {
-        console.log(error);
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage)
       });
-  };
+      
+  }
 
   return (
     <>
@@ -27,18 +35,18 @@ function Login() {
         </div>
         <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
           <p class="text-center text-3xl">Welcome.</p>
-          <form class="flex flex-col pt-3 md:pt-8" onsubmit="event.preventDefault();">
+          <form class="flex flex-col pt-3 md:pt-8">
             <div class="flex flex-col pt-4">
               <label for="email" class="text-lg">Email</label>
-              <input type="email" id="email" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+              <input type="email" id="email" placeholder="your@email.com" value={email} onChange={(e)=>setEmail(e.target.value)} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
             </div>
             <div class="flex flex-col pt-4">
             <label for="password" class="text-lg">Password</label>
-            <input type="password" id="password" placeholder="Password" value={password} onChange={(e) => setEmail(e.target.value)} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+            <input type="password" id="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
             </div>
             {/* <div class="flex flex-col pt-4"> */}
             {/* <input type="submit" value="Log In" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8" /> */}
-            <button class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">Log In</button>
+            <button onClick={onLogin} class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">Log In</button>
             {/* </div> */}
           </form>
           <div class="text-center pt-12 pb-12">

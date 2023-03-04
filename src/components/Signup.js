@@ -1,22 +1,35 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
-import { auth } from "../firebase";
+import React, {useState} from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import {  createUserWithEmailAndPassword  } from 'firebase/auth';
+import { auth } from '../firebase';
 
 function Signup() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const signUp = (e) => {
-    e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('');
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    
+    await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
+          // Signed in 
+          const user = userCredential.user;
+          console.log(user);
+          navigate("/login")
+          // ...
       })
       .catch((error) => {
-        console.log(error);
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+          // ..
       });
-  };
+
+  
+  }
 
   return (
     <>
@@ -30,7 +43,7 @@ function Signup() {
             <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
               <p class="text-center text-3xl">Join Us.</p>
 
-              <form class="flex flex-col pt-3 md:pt-8" onsubmit="event.preventDefault();">
+              <form class="flex flex-col pt-3 md:pt-8" onSubmit={onSubmit}>
                 <div class="flex flex-col pt-4">
                   <label for="name" class="text-lg">Name</label>
                   <input type="text" id="name" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
@@ -52,7 +65,7 @@ function Signup() {
                 </div> */}
 
                 {/* <input type="submit" value="Register" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8" /> */}
-                <button class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">Register</button>
+                <button type="submit" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">Register</button>
               </form>
 
               <div class="text-center pt-12 pb-12">
