@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {  createUserWithEmailAndPassword  } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth, signInWithGoogle  } from '../firebase';
 
 function Signup() {
   const navigate = useNavigate();
@@ -27,8 +27,6 @@ function Signup() {
           console.log(errorCode, errorMessage);
           // ..
       });
-
-  
   }
 
   return (
@@ -65,7 +63,11 @@ function Signup() {
                 </div> */}
 
                 {/* <input type="submit" value="Register" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8" /> */}
+                
                 <button type="submit" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">Register</button>
+                <button onClick={signInWithGoogle} class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">
+                  Continue with Google
+                </button>
               </form>
 
               <div class="text-center pt-12 pb-12">

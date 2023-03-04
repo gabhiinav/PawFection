@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {  signInWithEmailAndPassword   } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth, signInWithGoogle  } from '../firebase';
 import { NavLink, useNavigate } from 'react-router-dom'
 
 function Login() {
@@ -47,6 +47,9 @@ function Login() {
             {/* <div class="flex flex-col pt-4"> */}
             {/* <input type="submit" value="Log In" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8" /> */}
             <button onClick={onLogin} class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">Log In</button>
+            <button onClick={signInWithGoogle} class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">
+                  Continue with Google
+              </button>
             {/* </div> */}
           </form>
           <div class="text-center pt-12 pb-12">
