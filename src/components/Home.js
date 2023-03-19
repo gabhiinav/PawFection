@@ -16,7 +16,7 @@ function home() {
           
         </div>
         <div class="hidden md:flex items-center space-x-1">
-          <a href="#" class="py-5 px-3 text-gray-700 hover:text-gray-900">Blog</a>
+          <Link to="/blogs" class="py-5 px-3 text-gray-700 hover:text-gray-900">Blogs</Link>
           <a href="#" class="py-5 px-3 text-gray-700 hover:text-gray-900">Chat</a>
         </div>
       </div>
