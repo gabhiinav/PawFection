@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-function home() {
+function Home() {
   return (
     <div class="font-family-karla">
       <nav class="bg-gray-100">
@@ -17,7 +17,7 @@ function home() {
         </div>
         <div class="hidden md:flex items-center space-x-1">
           <Link to="/blogs" class="py-5 px-3 text-gray-700 hover:text-gray-900">Blogs</Link>
-          <a href="#" class="py-5 px-3 text-gray-700 hover:text-gray-900">Chat</a>
+          <Link to="/chats" class="py-5 px-3 text-gray-700 hover:text-gray-900">Chat</Link>
         </div>
       </div>
 
@@ -46,4 +46,4 @@ function home() {
   );
 }
 
-export default home;
+export default Home;

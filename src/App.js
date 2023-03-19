@@ -4,10 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home"
 import Login from "./components/Login"
 import Signup from "./components/Signup"
-import Blogs from "./components/Blogs"
-import CreatePost from "./components/CreatePost"
-import './App.css';
-
+import Chats from "./components/Chats"
 
 function App() {
   return (
@@ -18,8 +15,7 @@ function App() {
         <Route path="/home" element= {<Home />} />
         <Route path="/login" element= {<Login />} />
         <Route path="/signup" element= {<Signup />} />
-        <Route path="/blogs" element= {<Blogs />} />
-        <Route path="/createpost" element= {<CreatePost />} />
+        <Route path="/chats" element= {<Chats />} />
       </Routes>
     </Router>
   </div>
