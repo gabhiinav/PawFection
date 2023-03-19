@@ -36,6 +36,6 @@ export const signInWithGoogle = () => {
     
 };
 
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 export default app;

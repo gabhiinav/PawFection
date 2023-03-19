@@ -23,6 +23,7 @@ function Chats() {
         </div>
         </nav>
         </div>
+        
     </>
   )
 }
