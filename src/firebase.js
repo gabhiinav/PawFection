@@ -32,10 +32,6 @@ export const signInWithGoogle = () => {
     .catch((error) => {
       console.log(error);
     });
-
-    
 };
-
-export const db = getFirestore(app);
 
 export default app;
