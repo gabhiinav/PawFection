@@ -7,6 +7,7 @@ import Login from "./components/Login"
 import Signup from "./components/Signup"
 import Profile from "./components/Profile"
 import Chats from "./components/Chats"
+import DupApp from "./components/DupApp"
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/signup" element= {<Signup />} />
         <Route path="/chats" element= {<Chats />} />
         <Route path="/profile" element= {<Profile />} />
+        <Route path="/book" element= {<DupApp />} />
       </Routes>
     </Router>
   </div>

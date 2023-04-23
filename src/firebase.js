@@ -3,12 +3,14 @@ import { getAuth, GoogleAuthProvider, signInWithPopup  } from "firebase/auth";
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAJwJ86HnJvb9btNk7bMoCikAzJTJtoams",
-  authDomain: "pawfection-9bab1.firebaseapp.com",
-  projectId: "pawfection-9bab1",
-  storageBucket: "pawfection-9bab1.appspot.com",
-  messagingSenderId: "308496294860",
-  appId: "1:308496294860:web:5e64badb100587e7fa7369"
+  apiKey: "AIzaSyBHYb7pj9L8gmv6HFu1eR-OOH7QMyspy9c",
+  authDomain: "pawfection-f9f6e.firebaseapp.com",
+  databaseURL: "https://pawfection-f9f6e-default-rtdb.firebaseio.com",
+  projectId: "pawfection-f9f6e",
+  storageBucket: "pawfection-f9f6e.appspot.com",
+  messagingSenderId: "521662961796",
+  appId: "1:521662961796:web:ed7085793e0a5f27070ad1",
+  measurementId: "G-W1BMCL3SY3"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -35,3 +37,5 @@ export const signInWithGoogle = () => {
 };
 
 export default app;
+
+export const db = getFirestore(app);

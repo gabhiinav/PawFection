@@ -45,7 +45,9 @@ function Home() {
             <br />
           <div className='my-4 text-center'>
             <button className='border text-white border-gray-300 rounded py-2 px-5 ml-4 text-center'>
+            <Link to="/book">
               Book Now
+              </Link>
             </button>
           </div>
           </div>
